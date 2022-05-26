@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const { personModel } = require("./models");
-const { personRoute } = require("./routers");
+const { tagRouter, toolRouter, userRouter } = require("./routers");
 require("dotenv").config();
 const env = process.env;
 const connectDB = `mongodb+srv://${env.DB_USER}:${env.DB_PASSWORD}@cluster0.a43as.mongodb.net/?retryWrites=true&w=majority`;
+const cors = require("cors");
 
 mongoose
   .connect(connectDB, {
@@ -17,31 +17,22 @@ mongoose
   })
   .catch((e) => console.log(e));
 
+//set cors
+app.use(cors());
 //bodyparser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//set cors
-app.use((req, res, next) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  next();
-});
 
+//index
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("tool box server");
 });
 
-//NOTE router example
-app.use("/api/person", personRoute);
+//NOTE router
+app.use("/api/user", userRouter);
+app.use("/api/tool", toolRouter);
+app.use("/api/tag", tagRouter);
 
-//NOTE post example
-app.post("/set", async (req, res) => {
-  const { body } = req; // { "name":"Joe","gender":"male", "age":"18" }
-
-  const newPerson = new personModel(body); //建立新 person 物件
-  await newPerson.save(); // 寫入 DB
-  res.send({ body });
-});
-
-app.listen(env.DB_PORT, () => {
-  console.log(`Example app listening on port ${env.DB_PORT}`);
+app.listen(env.PORT, () => {
+  console.log(`tool box server listening on port ${env.PORT}`);
 });

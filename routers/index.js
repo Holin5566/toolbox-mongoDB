@@ -1,3 +1,5 @@
 module.exports = {
-  personRoute: require("./person-route"),
+  tagRouter: require("./tag-router"),
+  userRouter: require("./user-router"),
+  toolRouter: require("./tool-router"),
 };

@@ -1,3 +1,5 @@
 module.exports = {
-  personModel: require("./person-model"),
+  Tags: require("./tag-model"),
+  Tools: require("./tool-model"),
+  Users: require("./user-model"),
 };
