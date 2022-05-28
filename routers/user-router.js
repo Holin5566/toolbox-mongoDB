@@ -24,15 +24,6 @@ router.get("/", async (req, res) => {
     res.status(400).send(err);
   }
 });
-// router.get("/getTagsById", async (req, res) => {
-//   const { query } = rea;
-//   try {
-//     const data = await Model.find();
-//     res.status(200).send(data);
-//   } catch (err) {
-//     res.status(400).send(err);
-//   }
-// });
 
 // NOTE POST user
 router.post("/", async (req, res) => {
@@ -40,10 +31,11 @@ router.post("/", async (req, res) => {
   const data = req.body;
   console.log(data);
   // process data
+  const name = data.name.slice(0, data.name.indexOf("@"));
   const used = [];
   const interested = [];
   const creatAt = new Date();
-  const complete = { ...data, used, interested, creatAt };
+  const complete = { ...data, used, interested, creatAt, name };
 
   //建立新 tag 物件
   const newData = new Model(complete);

@@ -1,11 +1,11 @@
 const express = require("express");
-const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
 const { tagRouter, toolRouter, userRouter } = require("./routers");
 require("dotenv").config();
+const app = express();
 const env = process.env;
 const connectDB = `mongodb+srv://${env.DB_USER}:${env.DB_PASSWORD}@cluster0.a43as.mongodb.net/?retryWrites=true&w=majority`;
-const cors = require("cors");
 
 mongoose
   .connect(connectDB, {

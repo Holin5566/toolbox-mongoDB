@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Tools, Tags } = require("../models");
+const { Tools, Users } = require("../models");
+const mongoose = require("mongoose");
 // Model
 // name: String,
 // tags: Object,
@@ -29,6 +30,39 @@ router.get("/tags", async (req, res) => {
       if (err) res.status(400).send(err);
       res.status(200).send(tool.tags);
     });
+});
+
+router.get("/used_users", async (req, res) => {
+  // query = {_id}
+  const { query } = req;
+  const _id = new mongoose.Types.ObjectId(query._id);
+
+  try {
+    const result = await Users.find({ used: { $in: _id } });
+    const list = [];
+    result.forEach((user) => {
+      if (user.used.indexOf(_id) > -1) list.push({ name: user.name });
+    });
+    res.status(200).send(list);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+router.get("/interested_users", async (req, res) => {
+  // query = {_id}
+  const { query } = req;
+  const _id = new mongoose.Types.ObjectId(query._id);
+  try {
+    const result = await Users.find({ interested: { $in: _id } });
+    const list = [];
+    result.forEach((user) => {
+      if (user.interested.indexOf(_id) > -1) list.push({ name: user.name });
+    });
+    res.status(200).send(list);
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
 // NOTE POST tool

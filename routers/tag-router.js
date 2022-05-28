@@ -23,7 +23,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   //body = { name }
   const data = req.body;
-
   // process data
   const name = data.name.toLowerCase();
   const logo = "Di" + name[0].toUpperCase() + name.slice(1);
