@@ -3,7 +3,7 @@
 透過此平台讓大家能找到學習上的夥伴，或是有經驗的前輩。<br/>
 彼此交流以達到提升效率的目的。
 
-[點我詳細](https://holin5566.github.io/](https://github.com/Holin5566/holin5566.github.io) "github")
+[點我詳細](https://github.com/Holin5566/holin5566.github.io "點我詳細")
 
 ## 技術堆疊
 - Express
